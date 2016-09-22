@@ -1,19 +1,97 @@
 <header>
-  <nav>
-    <a [routerLink]="['']">Home</a>
-    <a [routerLink]="['about']">About</a>
-    <button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
-    <button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a routerLink='/home' class="navbar-brand">
+          Toppers Tips
+        </a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li>
+          <a routerLink = '/home' class="btn">
+            Home
+          </a>
+        </li>
+        <li class="dropdown">
+          <a class="btn dropdown-toggle" data-toggle="dropdown">
+            List of Courses<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a routerLink = '/courses/grps' class="btn">
+                  Group I, Group II etc..
+              </a>
+            </li>
+            <li>
+              <a routerLink = '/courses/banking' class="btn">
+                  IBPS PO, Clerical, RRB etc..
+              </a>
+            </li>
+            <li>
+              <a routerLink = '/courses/dsc' class="btn">
+                  DSC
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a routerLink = '/about' class="btn">
+            About
+          </a>
+        </li>
+        <li>
+          <a routerLink = '/contactus' class="btn">
+            Contact Us
+          </a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a class="btn" (click)="auth.login()" *ngIf="!auth.authenticated()">
+            <span class="glyphicon glyphicon-user"></span> Sign In
+          </a>
+        </li>
+        <li>
+          <a class="btn" (click)="auth.logout()" *ngIf="auth.authenticated()">
+            <span class="glyphicon glyphicon-log-in"></span> Sign Out
+          </a>
+        </li>
+      </ul>
+    </div>
+
   </nav>
 </header>
+
 <main>
-  <h1>Hello from {{api.title}}!</h1>
-
   <!-- Images (and assets) are parsed and loaded from within the public directory -->
-  <img src="/img/angular.png">
-
+  <h1> Welcome to Toppers Tips! your one stop for all job related material.</h1>
   <router-outlet></router-outlet>
 </main>
 <footer>
-  <a [href]="url">Webpack Angular 2 Starter</a>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6">
+        <h4>Company</h4> <br/> <br/>
+        <a routerLink='/aboutus'>About Us </a><br/>
+        <a routerLink='/aboutus'>Blog </a><br/>
+        <a routerLink='/aboutus'>News </a><br/>
+        <a routerLink='/aboutus'>Press Releases </a><br/>
+        <a routerLink='/aboutus'>Jobs </a><br/>
+        <a routerLink='/aboutus'>Contact Us </a><br/>
+      </div>
+      <div class="col-xs-6">
+        <h4>Connect With Us</h4> <br/> <br/>
+        Facebook <br/>
+        Google <br/>
+        LinkedIn <br/>
+        Twitter <br/>
+        Youtube <br/>
+        Contact Us <br/></div>
+    </div>
+    <div class="row">
+      <span>
+        All rights reserved. ToppersTips.<span class="glyphicon glyphicon-copyright-mark"></span>2016.
+      </span>
+    </div>
+  </div>
 </footer>
