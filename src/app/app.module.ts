@@ -7,6 +7,11 @@ import { AUTH_PROVIDERS }      from 'angular2-jwt';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { HomeDescribeComponent } from './home-describe/home-describe.component';
+import { CoursesComponent } from './courses/courses.component';
+import { PortfolioComponent } from './portfolio/portfolio.component';
+import { ContactUsComponent } from './contactus/contactus.component';
+
 import { ApiService } from './shared';
 import { routing, appRoutingProviders } from './app.routing';
 import { Auth } from './auth/auth.service';
@@ -24,7 +29,11 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    HomeDescribeComponent,
+    CoursesComponent,
+    PortfolioComponent,
+    ContactUsComponent
   ],
   providers: [
     appRoutingProviders,

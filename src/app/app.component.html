@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-default">
+  <!-- <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
         <a routerLink='/home' class="navbar-brand">
@@ -59,12 +59,43 @@
       </ul>
     </div>
 
-  </nav>
+  </nav> -->
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#myPage">Toppers Tips</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#courses">COURSES</a></li>
+        <li><a href="#portfolio">PORTFOLIO</a></li>
+        <!-- <li><a href="#pricing">PRICING</a></li> -->
+        <li><a href="#contact">CONTACT</a></li>
+        <li>
+          <a class="btn" (click)="auth.login()" *ngIf="!auth.authenticated()">
+            <span class="glyphicon glyphicon-user"></span> Sign In
+          </a>
+        </li>
+        <li>
+          <a class="btn" (click)="auth.logout()" *ngIf="auth.authenticated()">
+            <span class="glyphicon glyphicon-log-in"></span> Sign Out
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 </header>
 
 <main>
   <!-- Images (and assets) are parsed and loaded from within the public directory -->
-  <h1> Welcome to Toppers Tips! your one stop for all job related material.</h1>
   <router-outlet></router-outlet>
 </main>
 <footer>
