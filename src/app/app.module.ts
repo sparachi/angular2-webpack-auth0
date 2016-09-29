@@ -15,7 +15,7 @@ import { ContactUsComponent } from './contactus/contactus.component';
 import { ApiService } from './shared';
 import { routing, appRoutingProviders } from './app.routing';
 import { Auth } from './auth/auth.service';
-
+import { SubscribeService } from './services/subscribe/subscribe.service';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -39,7 +39,8 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     appRoutingProviders,
     AUTH_PROVIDERS,
     ApiService,
-    Auth
+    Auth,
+    SubscribeService
   ],
   bootstrap: [AppComponent]
 })
