@@ -36,6 +36,7 @@ export class Auth {
         profile.user_metadata = profile.user_metadata || {};
         localStorage.setItem('profile', JSON.stringify(profile));
         this.userProfile = profile;
+        //this.router.navigate(['home']);
       });
     });
   }
@@ -55,6 +56,6 @@ export class Auth {
     localStorage.removeItem('profile');
     localStorage.removeItem('id_token');
     this.zoneImpl.run(() => this.user = null);
-    this.router.navigate(['home']);
+    this.router.navigate(['']);
   }
 }

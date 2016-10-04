@@ -11,11 +11,12 @@ import { HomeDescribeComponent } from './home-describe/home-describe.component';
 import { CoursesComponent } from './courses/courses.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ContactUsComponent } from './contactus/contactus.component';
+import { ProfileComponent } from './profile/profile.component';
 
 import { ApiService } from './shared';
 import { routing, appRoutingProviders } from './app.routing';
 import { Auth } from './services/authorization/auth.service';
-//import { Auth } from './auth/auth.service';
+// import { Auth } from './auth/auth.service';
 import { SubscribeService } from './services/subscribe/subscribe.service';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
@@ -34,7 +35,8 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     HomeDescribeComponent,
     CoursesComponent,
     PortfolioComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    ProfileComponent
   ],
   providers: [
     appRoutingProviders,

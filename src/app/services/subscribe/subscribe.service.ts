@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import {Auth} from '../authorization/auth.service';
-//import {Auth} from '../../auth/auth.service';
+// import {Auth} from '../../auth/auth.service';
 
 @Injectable()
 export class SubscribeService {
@@ -27,27 +27,27 @@ export class SubscribeService {
      // ...using get request
      return this.http.get(this.subscribeService)
                     // ...and calling .json() on the response to return data
-                     .map((res:Response) => res.json())
-                     //...errors if any
-                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+                     .map( (res:Response) => res.json())
+                     // ...errors if any
+                     .catch( (error:any) => Observable.throw(error.json().error || 'Server error'));
 
   }
 
   // Add a new comment
  addSubscriber (subscriberEmail:string): Observable<any> {
     let bodyData = {
-      "subscriberEmail" : subscriberEmail
+      'subscriberEmail' : subscriberEmail
     }
-     let bodyString = JSON.stringify(bodyData); // Stringify payload
+     // let bodyString = JSON.stringify(bodyData); // Stringify payload
      let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-     let options       = new RequestOptions({ headers: headers }); // Create a request option
+     // let options       = new RequestOptions({ headers: headers }); // Create a request option
 
     //  return this.http.post(this.subscribeService, bodyData, options) // ...using post request
     //                   .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
     //                   .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
 
     return this.authHttp.get(`${this.API_URL}/api/authenticate`)
-      .map(res => {console.log("In map() " + res);res.json();})
+      .map(res => {console.log('In map() ' + res);res.json();})
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
       // .subscribe(
       //   data => {console.log("In subscribe()" + data);},
@@ -57,9 +57,9 @@ export class SubscribeService {
 
  securedPing() {
     return this.authHttp.get(`${this.API_URL}/api/authenticate`)
-      .map(res => {console.log("In map()" + res);res.json();})
+      .map(res => {console.log('In map() ' + res);res.json();})
       .subscribe(
-        data => {console.log("In subscribe()" + data);},
+        data => {console.log('In subscribe() '+ data);},
         error => {console.log(error._body);}
       );
   }

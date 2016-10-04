@@ -10,17 +10,18 @@ import { SubscribeService } from '../services/subscribe/subscribe.service';
   providers: [SubscribeService]
 })
 export class HomeDescribeComponent {
+
+  private subscriberEmail:string;
+  private successMessageLength:boolean;
+  
   // Constructor
  constructor(
     private subscriberService: SubscribeService
     ){}
 
-  private subscriberEmail:string;
-  private successMessageLength:boolean;
-
   addSubscriber() {
     console.log(this.subscriberEmail + " is subscriber email address");
-    //this.getSubscriber();
+    // this.getSubscriber();
     let subscribeOperation:Observable<any[]>;
 
     subscribeOperation = this.subscriberService.addSubscriber(this.subscriberEmail);
