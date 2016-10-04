@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
 import { ApiService } from './shared';
-import { Auth }       from './auth/auth.service';
+import { Auth }       from './services/authorization/auth.service';
+//import { Auth }       from './auth/auth.service';
 
 import '../style/app.scss';
 
