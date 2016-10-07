@@ -4,20 +4,11 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { AUTH_PROVIDERS }      from 'angular2-jwt';
 
+import { HomeModule } from './modules/home/home.module';
+import { UserModule } from './modules/user/user.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { HomeDescribeComponent } from './home-describe/home-describe.component';
-import { CoursesComponent } from './courses/courses.component';
-import { PortfolioComponent } from './portfolio/portfolio.component';
-import { ContactUsComponent } from './contactus/contactus.component';
-import { ProfileComponent } from './profile/profile.component';
 
-import { ApiService } from './shared';
 import { routing, appRoutingProviders } from './app.routing';
-import { Auth } from './services/authorization/auth.service';
-// import { Auth } from './auth/auth.service';
-import { SubscribeService } from './services/subscribe/subscribe.service';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -26,24 +17,16 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     BrowserModule,
     HttpModule,
     FormsModule,
-    routing
+    routing,
+    HomeModule,
+    UserModule
   ],
   declarations: [
-    AppComponent,
-    HomeComponent,
-    AboutComponent,
-    HomeDescribeComponent,
-    CoursesComponent,
-    PortfolioComponent,
-    ContactUsComponent,
-    ProfileComponent
+    AppComponent
   ],
   providers: [
     appRoutingProviders,
-    AUTH_PROVIDERS,
-    ApiService,
-    Auth,
-    SubscribeService
+    AUTH_PROVIDERS
   ],
   bootstrap: [AppComponent]
 })

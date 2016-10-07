@@ -1,0 +1,67 @@
+<header>
+  <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="">Toppers Tips</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#courses">COURSES</a></li>
+        <li><a href="#portfolio">PORTFOLIO</a></li>
+        <!-- <li><a href="#pricing">PRICING</a></li> -->
+        <li><a href="#contact">CONTACT</a></li>
+        <li>
+          <a class="btn" (click)="auth.login()" *ngIf="!auth.authenticated()">
+            <span class="glyphicon glyphicon-user"></span> Sign In
+          </a>
+        </li>
+        <li class="dropdown" *ngIf="auth.authenticated()">
+          <a class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user"></span> 
+            <strong>{{loggedInUser.nickname}}</strong>
+            <span class="glyphicon glyphicon-chevron-down"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <div class="navbar-login">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <p class="text-center">
+                      <span class="glyphicon glyphicon-user icon-size"></span>
+                    </p>
+                  </div>
+                  <div class="col-lg-8">
+                    <p class="text-left"><strong>{{loggedInUser.nickname}}</strong></p>
+                    <p class="text-left small">{{loggedInUser.email}}</p>
+                    <p class="text-left">
+                      <a routerLink='/profile' class="btn btn-primary btn-block btn-sm">View Profile</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <div class="navbar-login navbar-login-session">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <p>
+                      <a (click)="auth.logout()" class="btn btn-danger btn-block">Sign Out</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>

@@ -1,7 +1,7 @@
 import {Injectable, NgZone} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthHttp, tokenNotExpired} from 'angular2-jwt';
-//import {AuthConfig} from './config/auth0.config';
+import {AuthConfig} from '../../.././config/auth0.config';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -9,8 +9,7 @@ declare var Auth0Lock: any;
 @Injectable()
 export class Auth {
   // Replace YOUR_CLIENT_ID and YOUR_DOMAIN with your credentials
-  //lock = new Auth0Lock(AuthConfig.clientId, AuthConfig.domain);
-  lock = new Auth0Lock('w8c2hWGr4oPEAIPfW2D4foLeYHGw3yzS', 'topperstips.au.auth0.com');
+  lock = new Auth0Lock(AuthConfig.clientID, AuthConfig.domain);
   refreshSubscription: any;
   user: Object;
   zoneImpl: NgZone;
@@ -36,7 +35,7 @@ export class Auth {
         profile.user_metadata = profile.user_metadata || {};
         localStorage.setItem('profile', JSON.stringify(profile));
         this.userProfile = profile;
-        //this.router.navigate(['home']);
+        this.router.navigate(['user']);
       });
     });
   }
@@ -56,6 +55,5 @@ export class Auth {
     localStorage.removeItem('profile');
     localStorage.removeItem('id_token');
     this.zoneImpl.run(() => this.user = null);
-    this.router.navigate(['']);
   }
 }

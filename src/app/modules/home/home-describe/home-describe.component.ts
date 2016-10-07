@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 
-import { SubscribeService } from '../services/subscribe/subscribe.service';
+import { SubscribeService } from '../services/subscribe.service';
 
 @Component({
   selector: 'home-describe',
@@ -13,7 +13,7 @@ export class HomeDescribeComponent {
 
   private subscriberEmail:string;
   private successMessageLength:boolean;
-  
+
   // Constructor
  constructor(
     private subscriberService: SubscribeService

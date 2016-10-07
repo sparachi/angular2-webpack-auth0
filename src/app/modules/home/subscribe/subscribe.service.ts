@@ -8,8 +8,7 @@ import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import {Auth} from '../authorization/auth.service';
-// import {Auth} from '../../auth/auth.service';
+import {Auth} from './auth.service';
 
 @Injectable()
 export class SubscribeService {
