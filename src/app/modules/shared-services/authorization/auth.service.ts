@@ -13,7 +13,7 @@ export class Auth {
   refreshSubscription: any;
   user: Object;
   zoneImpl: NgZone;
-  //Store profile object in auth class
+  // Store profile object in auth class
   userProfile: any;
 
   constructor(private authHttp: AuthHttp, zone: NgZone, private router: Router) {
@@ -21,7 +21,7 @@ export class Auth {
     this.userProfile = JSON.parse(localStorage.getItem('profile'));
 
     // Add callback for lock `authenticated` event
-    this.lock.on("authenticated", (authResult) => {
+    this.lock.on('authenticated', (authResult) => {
       localStorage.setItem('id_token', authResult.idToken);
 
       // Fetch profile information

@@ -1,7 +1,11 @@
-import {Component} from '@angular/core';
-import {Observable} from 'rxjs/Rx';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
 import { SubscribeService } from '../services/subscribe.service';
+
+// Import RxJs required methods
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Component({
   selector: 'home-describe',
@@ -11,25 +15,27 @@ import { SubscribeService } from '../services/subscribe.service';
 })
 export class HomeDescribeComponent {
 
-  private subscriberEmail:string;
-  private successMessageLength:boolean;
+  private subscriberEmail: string;
+  private successMessageLength: boolean;
 
   // Constructor
  constructor(
     private subscriberService: SubscribeService
-    ){}
+    ) {}
 
   addSubscriber() {
-    console.log(this.subscriberEmail + " is subscriber email address");
+    console.log(this.subscriberEmail + ' is subscriber email address');
     // this.getSubscriber();
-    let subscribeOperation:Observable<any[]>;
+    let subscribeOperation: Observable<any[]>;
 
     subscribeOperation = this.subscriberService.addSubscriber(this.subscriberEmail);
     subscribeOperation.subscribe(
-      data => {
+      (data) => {
         // Log subscribers if any
-        console.log(JSON.stringify(data));
-        this.successMessageLength = (JSON.stringify(data)).length > 0;
+        console.log(data);
+        if (data) {
+          this.successMessageLength = (data).length > 0;
+        }
       },
       err => {
         // Log errors if any
@@ -40,7 +46,7 @@ export class HomeDescribeComponent {
   }
 
   getSubscribers() {
-    let subscribeOperation:Observable<any[]>;
+    let subscribeOperation: Observable<any[]>;
 
     subscribeOperation = this.subscriberService.getSubscribers();
     subscribeOperation.subscribe(

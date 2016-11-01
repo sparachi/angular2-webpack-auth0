@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Auth } from '../.././shared-services/authorization/auth.service';
 @Component({
-  selector: 'toppertips-home-page',
+  selector: 'toppertips-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -22,11 +22,11 @@ export class HomeComponent implements AfterViewInit {
   //   }
   // }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     console.log('Hello Home ngAfterViewInit');
     console.log(this.auth.authenticated());
 
-    if(this.auth.authenticated() === true && localStorage.getItem('profile') != null) {
+    if (this.auth.authenticated() === true && localStorage.getItem('profile') != null) {
       this.user = JSON.parse(localStorage.getItem('profile'));
       console.log(this.user);
     }

@@ -13,18 +13,18 @@ import { ContactUsComponent } from './contactus/contactus.component';
 import { HomeNavComponent } from './top-nav/homenav.component';
 import { HomeFooterComponent } from './footer/home-footer.component';
 
-//import { routing, appRoutingProviders } from './home.routing';
+// import { routing, appRoutingProviders } from './home.routing';
 import { Auth } from '.././shared-services/authorization/auth.service';
 import { SubscribeService } from './services/subscribe.service';
 
-import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
+// import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
     FormsModule
-    //routing
+    // routing
   ],
   declarations: [
     HomeComponent,
@@ -37,7 +37,7 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     HomeFooterComponent
   ],
   providers: [
-    //appRoutingProviders,
+    // appRoutingProviders,
     AUTH_PROVIDERS,
     Auth,
     SubscribeService
