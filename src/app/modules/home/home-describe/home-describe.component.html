@@ -6,6 +6,6 @@
     [(ngModel)]="subscriberEmail" required
     placeholder="Enter Email Address to subscribe to our newsletter">
     <button type="button" class="btn btn-danger" (click)="addSubscriber()">Subscribe</button>
-    <!-- <label name="successMessage" *ngIf="successMessageLength" text="subscriber added succesfully!"> -->
+    <p name="successMessage" *ngIf="successMessageLength">subscriber added succesfully!</p>
   </form>
 </div>

@@ -51,10 +51,10 @@ export class SubscribeService {
 
     return this.http.post('http://127.0.0.1:5000/api/subscriber', bodyData, headers)
           .map((resp: Response) => {
-                                        console.log('In map() ');
-                                        resp.json();
+                                        console.log('In map() ', resp.json());
+                                        return resp.json();
                                       })
-          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+          .catch( this.handleError );
  }
 
  securedPing() {
@@ -62,7 +62,12 @@ export class SubscribeService {
       .map( res => {console.log('In map() ', res); res.json(); })
       .subscribe(
         data => { console.log('In subscribe() ', data); },
-        error => { console.log(error._body); }
+        error => { this.handleError; }
       );
+  }
+
+  handleError(error: any) {
+    console.error(error);
+    return Observable.throw(error.json().error || 'Server error');
   }
 }

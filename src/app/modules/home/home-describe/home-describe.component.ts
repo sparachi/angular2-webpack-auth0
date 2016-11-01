@@ -26,15 +26,15 @@ export class HomeDescribeComponent {
   addSubscriber() {
     console.log(this.subscriberEmail + ' is subscriber email address');
     // this.getSubscriber();
-    let subscribeOperation: Observable<any[]>;
+    let subscribeOperation: Observable<any>;
 
     subscribeOperation = this.subscriberService.addSubscriber(this.subscriberEmail);
     subscribeOperation.subscribe(
-      (data) => {
+      (response: any) => {
         // Log subscribers if any
-        console.log(data);
-        if (data) {
-          this.successMessageLength = (data).length > 0;
+        // console.log('In addSubscriber() subscribe method', response.data);
+        if (response && response.data) {
+          this.successMessageLength = (response.data).length > 0;
         }
       },
       err => {
