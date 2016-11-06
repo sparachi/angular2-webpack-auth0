@@ -1,11 +1,11 @@
 <div class="jumbotron text-center">
   <h2> Welcome to Toppers Tips! your one stop shop for all job related material.</h2>
   <p>We specialize in Public service commission, Civils coaching!</p>
-  <form class="form-inline">
+  <form class="form-inline" #subscriberForm="ngForm" (ngSubmit)="addSubscriber(subscriberForm.value)">
     <input type="email" name="subscriberEmail" class="form-control" size="50"
-    [(ngModel)]="subscriberEmail" required
-    placeholder="Enter Email Address to subscribe to our newsletter">
-    <button type="button" class="btn btn-danger" (click)="addSubscriber()">Subscribe</button>
-    <p name="successMessage" *ngIf="successMessageLength">subscriber added succesfully!</p>
+     ngModel required
+     placeholder="Enter Email Address to subscribe to our newsletter">
+    <button type="submit" class="btn btn-danger">Subscribe</button>
+    <p name="successMessage" *ngIf="showMessage">subscriber added succesfully!</p>
   </form>
 </div>

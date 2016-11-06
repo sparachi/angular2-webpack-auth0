@@ -16,6 +16,7 @@ import { HomeFooterComponent } from './footer/home-footer.component';
 // import { routing, appRoutingProviders } from './home.routing';
 import { Auth } from '.././shared-services/authorization/auth.service';
 import { SubscribeService } from './services/subscribe.service';
+import { UserService } from './services/user.service';
 
 // import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -40,7 +41,8 @@ import { SubscribeService } from './services/subscribe.service';
     // appRoutingProviders,
     AUTH_PROVIDERS,
     Auth,
-    SubscribeService
+    SubscribeService,
+    UserService
   ],
   exports: [HomeComponent]
 })

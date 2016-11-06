@@ -16,25 +16,30 @@ import 'rxjs/add/operator/catch';
 export class HomeDescribeComponent {
 
   private subscriberEmail: string;
-  private successMessageLength: boolean;
+  private showMessage: boolean = false;
 
   // Constructor
  constructor(
     private subscriberService: SubscribeService
     ) {}
 
-  addSubscriber() {
-    console.log(this.subscriberEmail + ' is subscriber email address');
+  addSubscriber(formData: any) {
+    console.log(formData.subscriberEmail + ' is subscriber email address');
     // this.getSubscriber();
     let subscribeOperation: Observable<any>;
 
-    subscribeOperation = this.subscriberService.addSubscriber(this.subscriberEmail);
+    subscribeOperation = this.subscriberService.addSubscriber(formData.subscriberEmail);
     subscribeOperation.subscribe(
       (response: any) => {
         // Log subscribers if any
         // console.log('In addSubscriber() subscribe method', response.data);
-        if (response && response.data) {
-          this.successMessageLength = (response.data).length > 0;
+        if (response && response.data && (response.data).length > 0) {
+          this.showMessage = true;
+          //wait 3 Seconds and hide
+         setTimeout(function() {
+             this.showMessage = false;
+             console.log(this.showMessage);
+         }.bind(this), 5000);
         }
       },
       err => {

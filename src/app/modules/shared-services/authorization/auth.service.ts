@@ -1,7 +1,13 @@
-import {Injectable, NgZone} from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthHttp, tokenNotExpired} from 'angular2-jwt';
-import {AuthConfig} from '../../.././config/auth0.config';
+import { Injectable, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
+import { AuthConfig } from '../../.././config/auth0.config';
+import { Observable } from 'rxjs/Rx';
+
+// Import RxJs required methods
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -15,8 +21,9 @@ export class Auth {
   zoneImpl: NgZone;
   // Store profile object in auth class
   userProfile: any;
+  API_ON_LOGIN_URL = 'http://127.0.0.1:5000/api/authenticate/onlogin';
 
-  constructor(private authHttp: AuthHttp, zone: NgZone, private router: Router) {
+  constructor(private http: Http, zone: NgZone, private router: Router) {
     this.zoneImpl = zone;
     this.userProfile = JSON.parse(localStorage.getItem('profile'));
 
@@ -35,6 +42,7 @@ export class Auth {
         profile.user_metadata = profile.user_metadata || {};
         localStorage.setItem('profile', JSON.stringify(profile));
         this.userProfile = profile;
+        this.addProfile();
         this.router.navigate(['user']);
       });
     });
@@ -56,5 +64,31 @@ export class Auth {
     localStorage.removeItem('id_token');
     this.zoneImpl.run(() => this.user = null);
     this.router.navigate(['']);
+  }
+
+  // Add a new comment
+  addProfile(): Observable<any> {
+    let bodyData = {
+      'id_token' : localStorage.getItem('id_token'),
+      'profile' : localStorage.getItem('profile')
+    };
+
+     // let bodyString = JSON.stringify(bodyData); // Stringify payload
+     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+
+     console.log('In addProfile() of auth.service');
+     let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+    return this.http.post(this.API_ON_LOGIN_URL, bodyData, headers)
+          .map((resp: Response) => {
+                                        console.log('In map() ', resp.json());
+                                        return resp.json();
+                                      })
+          .catch( this.handleError );
+ }
+
+ handleError(error: any) {
+    console.error(error);
+    return Observable.throw(error.json().error || 'Server error');
   }
 }
