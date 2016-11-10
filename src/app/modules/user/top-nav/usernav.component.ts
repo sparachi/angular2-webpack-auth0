@@ -14,10 +14,11 @@ export class UserNavComponent {
     // Do stuff
   }
 
-  // ngAfterViewInit() {
-  //   if(this.auth.authenticated() === true && localStorage.getItem('profile') != null) {
-  //     this.loggedInUser = JSON.parse(localStorage.getItem('profile'));
-  //   }
-  // }
+  ngAfterViewInit() {
+    if(this.auth.authenticated() === true) {
+      this.loggedInUser = this.auth.getProfile());
+      console.log(this.loggedInUser);
+    }
+  }
 
 }

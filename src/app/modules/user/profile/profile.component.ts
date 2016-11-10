@@ -14,9 +14,9 @@ export class ProfileComponent  implements OnInit {
   }
 
   ngOnInit() {
-    if (this.auth.authenticated() === true && localStorage.getItem('profile') != null) {
-      this.user = JSON.parse(localStorage.getItem('profile'));
-      console.log(this.user);
+    if (this.auth.authenticated() === true) {
+      this.user = this.auth.getProfile();
+      console.log('this.user in profile.component', this.user);
     }
   }
 }
