@@ -24,7 +24,7 @@
         <li class="dropdown" *ngIf="auth.authenticated()">
           <a class="dropdown-toggle" data-toggle="dropdown">
             <span class="glyphicon glyphicon-user"></span> 
-            <strong>{{loggedInUser.nickname}}</strong>
+            <strong>{{loggedInUser?.nickname | async}}</strong>
             <span class="glyphicon glyphicon-chevron-down"></span>
           </a>
           <ul class="dropdown-menu">
@@ -37,8 +37,8 @@
                     </p>
                   </div>
                   <div class="col-lg-8">
-                    <p class="text-left"><strong>{{loggedInUser.nickname}}</strong></p>
-                    <p class="text-left small">{{loggedInUser.email}}</p>
+                    <p class="text-left"><strong>{{loggedInUser?.nickname | async}}</strong></p>
+                    <p class="text-left small">{{loggedInUser?.email | async}}</p>
                     <p class="text-left">
                       <a routerLink='/profile' class="btn btn-primary btn-block btn-sm">View Profile</a>
                     </p>

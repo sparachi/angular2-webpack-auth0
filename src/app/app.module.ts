@@ -8,7 +8,7 @@ import { HomeModule } from './modules/home/home.module';
 import { UserModule } from './modules/user/user.module';
 import { AppComponent } from './app.component';
 
-import { routing, appRoutingProviders } from './app.routing';
+import { AppRoutingModule } from './app.routing';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -17,15 +17,14 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     BrowserModule,
     HttpModule,
     FormsModule,
-    routing,
     HomeModule,
-    UserModule
+    UserModule,
+    AppRoutingModule
   ],
   declarations: [
     AppComponent
   ],
   providers: [
-    appRoutingProviders,
     AUTH_PROVIDERS
   ],
   bootstrap: [AppComponent]

@@ -9,17 +9,19 @@ import { UserFooterComponent } from './footer/user-footer.component';
 import { UserNavComponent } from './top-nav/usernav.component';
 import { UserDetailsComponent } from './user-details/details.component';
 
-// import { routing, appRoutingProviders } from './user.routing';
+import { UserRoutingModule } from './user.routing';
 import { Auth } from '.././shared-services/authorization/auth.service';
 
 // import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
+
+import { ProfileResolver }               from './services/profile.resolve';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
-    FormsModule
-    // routing
+    FormsModule,
+    UserRoutingModule
   ],
   declarations: [
     ProfileComponent,
@@ -28,9 +30,9 @@ import { Auth } from '.././shared-services/authorization/auth.service';
     UserDetailsComponent
   ],
   providers: [
-    // appRoutingProviders,
     AUTH_PROVIDERS,
-    Auth
+    Auth,
+    ProfileResolver
   ],
   exports: [ProfileComponent]
 })

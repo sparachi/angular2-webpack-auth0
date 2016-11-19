@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Resolve } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
 import { AuthConfig } from '../../.././config/auth0.config';
@@ -8,9 +8,12 @@ import { Observable } from 'rxjs/Rx';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+// import 'rx/core/operator/fromNodeCallback';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
+
+let Rx = require('rx');
 
 @Injectable()
 export class Auth {
@@ -26,7 +29,7 @@ export class Auth {
 
   constructor(private http: Http, zone: NgZone, private router: Router) {
     this.zoneImpl = zone;
-    //this.userProfile = JSON.parse(localStorage.getItem('profile'));
+    // this.userProfile = JSON.parse(localStorage.getItem('profile'));
 
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult) => {
@@ -55,17 +58,17 @@ export class Auth {
     this.router.navigate(['']);
   }
 
-  public getProfile(): any{
+  public getProfile(token: any): any {
     // Fetch profile information
-    this.lock.getProfile(this.id_token, (error, profile) => {
+    // console.log('In auth.service getProfile()');
+    this.lock.getProfile(token, (error, profile) => {
       if (error) {
         // Handle error
-        alert(error);
+        console.log(error);
         return;
       }
-      // profile.user_metadata = profile.user_metadata || {};
-      // localStorage.setItem('profile', JSON.stringify(profile));
-      console.log('profile data is ', profile);
+      profile.user_metadata = profile.user_metadata || {};
+      // console.log('profile data is ', profile);
       this.userProfile = profile;
       console.log('this.userProfile data is ', profile);
     });
@@ -73,7 +76,36 @@ export class Auth {
     return this.userProfile;
   }
 
-  onLogin(){
+  public getProfileObservable(token: any): Observable<any> {
+    // Fetch profile information
+    console.log('In auth.service getProfileObservable()');
+    // console.log(Rx.Observable.fromNodeCallback);
+
+    let source = Rx.Observable.fromNodeCallback(() => this.lock.getProfile);
+    // console.log(source);
+    return source(token);
+
+    // return Observable.create(() => function(observer) {
+    //   console.log('In Observable');
+    //   this.lock.getProfile(token, (error, profile) => {
+    //     if (error) {
+    //       // Handle error
+    //       console.log(error);
+    //       observer.onError(error);
+    //     }
+    //     profile.user_metadata = profile.user_metadata || {};
+    //     // console.log('profile data is ', profile);
+    //     this.userProfile = profile;
+    //     console.log('this.userProfile data is ', profile);
+    //     observer.onNext(profile);
+    //     observer.onCompleted();
+    //   });
+    // });
+
+    // return this.userProfile;
+  }
+
+  onLogin() {
     let sendLoginOperation: Observable<any>;
     sendLoginOperation = this.callOnLoginApi();
     sendLoginOperation.subscribe(
@@ -83,14 +115,14 @@ export class Auth {
       err => {
         console.log(err);
       }
-    )
+    );
   }
 
   // Add a new comment
   callOnLoginApi(): Observable<any> {
     let bodyData = {
       'id_token' : this.id_token,
-      'profile' : this.getProfile()
+      'profile' : this.getProfile(this.id_token)
     };
     // ... Set content type to JSON
     let headers      = new Headers({ 'Content-Type': 'application/json' });
