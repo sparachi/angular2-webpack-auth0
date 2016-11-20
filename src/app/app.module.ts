@@ -8,6 +8,8 @@ import { HomeModule } from './modules/home/home.module';
 import { UserModule } from './modules/user/user.module';
 import { AppComponent } from './app.component';
 
+import { AuthGuard } from './modules/shared-services/authorization/auth-gaurd.service';
+
 import { AppRoutingModule } from './app.routing';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
@@ -25,7 +27,8 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     AppComponent
   ],
   providers: [
-    AUTH_PROVIDERS
+    AUTH_PROVIDERS,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

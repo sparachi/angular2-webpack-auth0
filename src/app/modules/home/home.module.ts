@@ -13,7 +13,7 @@ import { ContactUsComponent } from './contactus/contactus.component';
 import { HomeNavComponent } from './top-nav/homenav.component';
 import { HomeFooterComponent } from './footer/home-footer.component';
 
-// import { routing, appRoutingProviders } from './home.routing';
+import { HomeRoutingModule } from './home.routing';
 import { Auth } from '.././shared-services/authorization/auth.service';
 import { SubscribeService } from './services/subscribe.service';
 import { UserService } from './services/user.service';
@@ -24,8 +24,8 @@ import { UserService } from './services/user.service';
   imports: [
     CommonModule,
     HttpModule,
-    FormsModule
-    // routing
+    FormsModule,
+    HomeRoutingModule
   ],
   declarations: [
     HomeComponent,
@@ -38,7 +38,6 @@ import { UserService } from './services/user.service';
     HomeFooterComponent
   ],
   providers: [
-    // appRoutingProviders,
     AUTH_PROVIDERS,
     Auth,
     SubscribeService,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Auth } from '../.././shared-services/authorization/auth.service';
@@ -11,7 +11,7 @@ import { Auth } from '../.././shared-services/authorization/auth.service';
 })
 export class UserNavComponent implements OnInit{
 
-  loggedInUser: any;
+  @Input() loggedInUser: any;
   constructor(private auth: Auth, private route: ActivatedRoute, private router: Router) {
     // Do stuff
   }
@@ -22,7 +22,7 @@ export class UserNavComponent implements OnInit{
       // this.route.params.subscribe((response) => {
       //   console.log('data received ', response);
       // });
-      this.loggedInUser = this.auth.getProfile(localStorage.getItem('id_token'));
+      // this.loggedInUser = this.auth.getProfile(localStorage.getItem('id_token'));
       // this.auth.getProfileObservable(localStorage.getItem('id_token')).subscribe(
       //   function (x)   { console.log('next', x); this.loggedInUser = x;
       //                   console.log('this.loggedInUser in UserNavComponent', this.loggedInUser); },

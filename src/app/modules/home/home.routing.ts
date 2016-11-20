@@ -1,15 +1,27 @@
 import { RouterModule, Routes }         from '@angular/router';
-import { ModuleWithProviders }          from '@angular/core';
+import { NgModule }                     from '@angular/core';
 
 import { HomeComponent }                from './home/home.component';
-import { AboutComponent }               from './about/about.component';
 
 const routes: Routes = [
-  // { path: '', component: HomeComponent },
-  // { path: 'home', component: HomeComponent },
-  // { path: 'about', component: AboutComponent}
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  }
 ];
 
-export const appRoutingProviders: any[] = [];
+@NgModule({
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class HomeRoutingModule { }
 
-export const routing: ModuleWithProviders = RouterModule.forChild(routes);

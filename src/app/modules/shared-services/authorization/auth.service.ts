@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Router, Resolve } from '@angular/router';
+import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
 import { AuthConfig } from '../../.././config/auth0.config';
@@ -52,7 +52,7 @@ export class Auth {
   }
 
   public logout() {
-    localStorage.removeItem('profile');
+    // localStorage.removeItem('profile');
     localStorage.removeItem('id_token');
     this.zoneImpl.run(() => this.user = null);
     this.router.navigate(['']);
@@ -74,6 +74,24 @@ export class Auth {
     });
 
     return this.userProfile;
+  }
+
+  public getProfilePromise(token: any) {
+    let promise =  new Promise(() => function(resolve, reject){
+        console.log('toke sent ', token);
+        this.lock.getProfile(token, (error, profile) => {
+        if (error) {
+          // Handle error
+          console.log(error);
+          reject(error);
+        }
+        profile.user_metadata = profile.user_metadata || {};
+        this.userProfile = profile;
+        console.log('this.getProfilePromise data is ', profile);
+        resolve(this.userProfile);
+      });
+    });
+    return promise.then(profile => { return profile; });
   }
 
   public getProfileObservable(token: any): Observable<any> {
@@ -128,7 +146,7 @@ export class Auth {
     let headers      = new Headers({ 'Content-Type': 'application/json' });
     // Create a request option
     let options       = new RequestOptions({ headers: headers });
-    console.log('In addProfile() of auth.service');
+    console.log('In callOnLoginApi() of auth.service');
     return this.http.post(this.API_ON_LOGIN_URL, bodyData, headers)
             .map((resp: Response) => {
                                         console.log('In map() ', resp.json());

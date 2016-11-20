@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Auth } from '../.././shared-services/authorization/auth.service';
 
 @Component({
@@ -9,14 +10,16 @@ import { Auth } from '../.././shared-services/authorization/auth.service';
 export class ProfileComponent  implements OnInit {
 
   user: any = {};
-  constructor(private auth: Auth) {
+  constructor(private auth: Auth, private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
     if (this.auth.authenticated() === true) {
-      // this.user = this.auth.getProfile(localStorage.getItem('id_token'));
-      // console.log('this.user in profile.component', this.user);
+      this.route.data.subscribe( profile => {
+        console.log('this.user in profile component', this.user);
+        this.user = profile;
+      });
     }
   }
 }
