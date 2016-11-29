@@ -2,6 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { Auth } from '../.././shared-services/authorization/auth.service';
 @Component({
   selector: 'toppertips-home',
+  moduleId: module.id,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
